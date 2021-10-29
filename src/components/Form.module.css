@@ -1,0 +1,256 @@
+
+.formGroup {
+   display: flex;
+    flex-direction: row;
+    padding:  0 30px;
+    margin: 40px 0px;
+    /* max-width: 60%; */
+    
+}
+input, textarea {
+    outline: none;
+    border: 2px solid rgb(230, 230, 230);
+    font-size: 2.6rem;
+    padding: 8px;
+    color: rgb(53, 53, 53);
+    box-sizing: border-box;
+}
+label {
+    flex: 1;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #3C3C3C;
+}
+.formGroup :nth-child(2){
+    flex: 2;
+
+}
+
+.radio label {
+    margin-left: 10px;
+    font-size: 1.3rem;
+}
+
+.progress {
+    max-width: 90%;
+    margin: 0 auto;
+    height: 4px;
+    background-color: rgb(215, 215, 215)
+}
+.first, .second {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #5CBD9D;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.progress {
+    position: relative;
+    margin-bottom: 70px;
+}
+.first, .second {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.first {
+    left: 27%;
+}
+.second {
+    right: 27%;
+}
+.progressBar {
+    background-color: #5CBD9D;
+    height: 4px;
+}
+.nextBtn, .backBtn {
+    padding: 8px 16px ;
+    border: none;
+    font-weight: 500;
+    background-color: #BDC3C7;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    margin: 40px;
+    display: block;
+    margin-left: auto;
+    cursor: pointer;
+    transition: all .3s;
+}
+.nextBtn:hover, .backBtn:hover {
+    background-color: #8f9497;
+}
+.backBtn {
+    margin: 40px;
+    margin-right: auto;
+}
+.submitBtn {
+    padding: 8px 16px;;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    display: inline;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(45,136,215);
+    color: white;
+    margin-right: auto;
+    transition: all .3s;
+}
+.submitBtn:hover {
+    background-color: rgb(22, 112, 190);
+}
+select {
+    outline: none;
+    border: 2px solid rgb(230, 230, 230);
+    font-size: 2rem;
+    padding: 8px;
+    color: rgb(53, 53, 53);
+}
+input[type='radio'] {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+.checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.addService {
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: block;
+    margin: 10px 0px;
+    transition: all .3s;
+    border: 2px solid black;
+}
+.addService:hover{
+    background-color: rgb(159, 159, 159);
+    color: black;
+    /* border: 2px solid black; */
+}
+.serviceList h2 {
+    padding: 0;
+    margin: 10px 0px;
+}
+.requiredStar {
+    color: red;
+    font-size: 2.3rem;
+}
+.message {
+    text-align: center;
+    color: red;
+}
+
+.successMessage {
+    background-color: rgba(126, 194, 126, 0.39);
+    display: block;
+    margin: 0px auto;
+    padding: 10px 40px;
+    border-radius: 5px;
+    max-width: fit-content;
+}
+.successMessage p {
+    color: green;
+    font-size: 1.3rem;
+}
+
+.expImages img {
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px;
+
+}
+.expImages {
+    text-align: center;
+}
+
+input[type='file'] {
+    min-height: 300px;
+    /* width: fit-content; */
+    width: 100%;
+    position: relative;
+
+}
+.uploadIcon {
+    padding: 30px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    text-align: center;
+}
+.uploadIcon p {
+    font-size: 1.5rem;
+    color: grey;
+}
+.uploadIcon i {
+    cursor: pointer;
+    color: #3998DB;
+}
+
+
+select {
+    cursor: pointer;
+    border-radius: 6px;
+    color: grey;
+}
+
+@media(max-width: 768px){
+    .uploadIcon {
+        padding: 15px;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+    .dragdrop {
+        margin-top: 20px;
+        /* box-shadow: none; */
+        max-width: 100%;
+    }
+    .content {
+        display: none;
+    }
+    
+    .formGroup {
+        display: block;
+    }
+    input,select,textarea {
+        max-width: 100%;
+        margin-top: 10px;
+    }
+    select {
+        width: 100%;
+    }
+    label {
+        font-size: 1.6rem;
+    }
+    .services {
+        width: 100% !important;
+    }
+    .nextBtn,.backBtn,.submitBtn {
+        margin: 15px auto;
+        font-size: 3rem;
+    }
+}
+
+
+

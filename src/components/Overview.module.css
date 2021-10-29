@@ -1,0 +1,227 @@
+.header {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+.headerImage {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+.headerContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.849);
+    width: 100%;
+    padding: 10px 80px;
+}
+.headerContent h1 {
+    color: rgb(36, 36, 36);
+    margin: 10px 0px ;
+    font-size: 3rem;
+   
+
+}
+.occupations {
+    display: flex;
+    flex-wrap: wrap;
+}
+.occupations p {
+    border: 1px solid grey;
+    max-width: fit-content;
+    padding: 8px;
+    margin-bottom: 6px;
+    font-weight: 500;
+    margin-right: 10px;
+    border-radius: 6px;
+
+}
+.websiteName {
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+}
+.websiteName a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: rgb(24, 114, 192);
+}
+
+.address {
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+}
+
+.address p {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.email, .phone {
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+.phone img, .email img, .websiteName img, .address img {
+    margin-right: 14px;
+    width: 24px;
+}
+.line {
+    height: 2px;
+    width: 95%;
+    margin: 20px auto;
+    background-color: rgb(177, 177, 177);
+    border-radius: 4px;
+}
+.headerCards {
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-around;
+}
+.headerCards img {
+    height: 65px;
+    /* height: auto; */
+    margin-right: 15px;
+}
+.headerCards h2 {
+    font-size: 2.3rem;
+    font-weight: bold;
+}
+.headerCards p {
+    font-size: 1.4rem;
+}
+.catalogue {
+    padding: 30px 0px;
+}
+.catalogueImages {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.catalogueImages div:nth-child(odd) {
+    background-color: #D8D8D8;
+    height: 300px;
+    width: 33.33%;
+}
+.catalogueImages div:nth-child(even ){
+    background-color: #BABABA;
+    height: 300px;
+    width: 33.33%;
+}
+.catalogue h1,.highlights h1, .faq h1 {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 3rem;
+    letter-spacing: 2px;
+}
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.lastImage {
+    position: relative;
+}
+.moreImages {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 10rem;
+    color: rgb(210, 210, 210);
+    font-weight: bold;
+}
+
+.highlights {
+    padding: 30px 0px;
+    background-color: #F2F2F2;
+}
+.highlight {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+.highlight img {
+    min-height: 80px;
+    max-height: 40px;
+    padding: 18px;
+    background-color: #F6BA33;
+    margin-right: 15px;
+}
+.faq {
+    padding: 30px 0px;
+}
+.questions {
+    max-width: 60%;
+    margin: 60px auto;
+}
+.questions h3 {
+    cursor: pointer;
+    margin: 30px 0px;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+.questions p {
+    color: rgb(65, 65, 65);
+    font-size: 1.2rem;
+    /* display: none; */
+   
+}
+.questions span {
+    font-size: 2.5rem;
+    z-index: -1;
+}
+.hide {
+    display: none;
+}
+
+@media (max-width: 768px){
+   .headerImage {
+       height: 30vh;
+       width: 100vw;
+   } 
+   .headerContent h1 {
+       font-size: 1.2rem;
+   }
+   .headerContent {
+       position: static;
+       width: 100vw;
+       padding: 12px;
+       margin: 0;
+   }
+   .occupations p {
+       font-size: 0.7rem;
+       padding: 6px 
+   }
+  .phone,.email {
+       font-size: 0.8rem;
+   }
+   .websiteName a {
+       font-size: 0.8rem;
+   }
+   .address p {
+       font-size: 0.8rem;
+   }
+   .phone,.email,.websiteName,.address{
+       margin: 8px 0px;
+   }
+   .phone img, .email img, .websiteName img, .address img {
+       width: 20px;
+   }
+   .headerCards {
+       flex-direction: column;
+       justify-content: flex-start;
+       /* align-item; */
+   }
+   .catalogue {
+       margin-top: 100px;
+   }
+}

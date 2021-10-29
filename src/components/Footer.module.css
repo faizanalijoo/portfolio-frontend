@@ -1,0 +1,20 @@
+footer p {
+    text-align: center;
+    background-color: rgba(233, 233, 233, 0.884);
+    padding: 25px 0px;
+    font-size: 1rem;
+    color: rgb(95, 95, 95);
+}
+.link {
+    background-color: black;
+    text-align: center;
+    color: white;
+    padding: 40px;
+}
+.link h3 {
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+.link h3:hover {
+    text-decoration: underline;
+}
