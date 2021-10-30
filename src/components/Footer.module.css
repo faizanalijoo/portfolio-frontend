@@ -8,14 +8,15 @@ footer p {
 .link {
     background-color: black;
     text-align: center;
-    color: white;
     padding: 40px;
 }
-.link h3 {
+.link .linkk {
     font-size: 1.6rem;
     cursor: pointer;
+    color: white;
+    text-decoration: none;
 }
-.link h3:hover {
+.link .linkk:hover {
     text-decoration: underline;
 }
 

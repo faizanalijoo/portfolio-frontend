@@ -3,9 +3,10 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import moment from "moment";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 
-function Form() {
+function Form(props) {
     const [firstPage, setFirstPage] = useState(true)
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -135,7 +136,9 @@ function Form() {
         }
         let res = await axios.post('http://localhost:3001/adduser',data);
         if(res.status == 200){
+            
             setSuccessMessage(true)
+            window.location.pathname = `/overview/${res?.data._id}`
         }
         }
 
@@ -166,9 +169,6 @@ function Form() {
             })
             .catch(err => console.log(err))
             }
-
-
-            console.log(MediaArr);
 
     return <React.Fragment>
         <Header/>
@@ -223,7 +223,7 @@ function Form() {
                 
 
                 <div className={styles.checkbox}>
-                <input onChange={numberProjectsHandler} value='above 20' type='radio' name='numberProjects'/>
+                <input onChange={numberProjectsHandler} value='Above 20' type='radio' name='numberProjects'/>
                 <label>Above 20</label>
                 </div>
                
@@ -235,23 +235,23 @@ function Form() {
                
                <div className={styles.checkbox}>
                <input onChange={firmSizeHandler} value='0-20' type='radio' name='size'/>
-                <label>0-20</label><br/>
+                <label>0-20 people</label><br/>
                </div>
                 
                 <div className={styles.checkbox}>
                 <input onChange={firmSizeHandler} value='21-50' type='radio' name='size'/>
-                <label>21-50</label><br/>
+                <label>21-50 people</label><br/>
                 </div>
 
                 
 
                 <div className={styles.checkbox}>
                 <input onChange={firmSizeHandler} value='51-100' type='radio' name='size'/>
-                <label>51-100</label><br/>
+                <label>51-100 people</label><br/>
                 </div>
                 
                 <div className={styles.checkbox}>
-                <input onChange={firmSizeHandler} value='above 100' type='radio' name='size'/>
+                <input onChange={firmSizeHandler} value='Above 100' type='radio' name='size'/>
                 <label>Above 100</label><br/>
                 </div>
             </div>

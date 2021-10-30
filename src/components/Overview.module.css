@@ -99,7 +99,7 @@
 }
 .catalogueImages {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 .catalogueImages div:nth-child(odd) {
@@ -122,6 +122,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+.image {
+    opacity: 0.9;
+    transition: all .4s;
+}
+.image:hover {
+    opacity: 1;
 }
 .lastImage {
     position: relative;
