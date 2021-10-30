@@ -1,5 +1,5 @@
 import styles from "./Overview.module.css"
-import React from 'react'
+import React, { useState } from 'react'
 import briefcase from "../resources/briefcase.png"
 import medal from "../resources/medal.png"
 import rupee from "../resources/rupee.png"
@@ -10,11 +10,34 @@ import phonelogo from "../resources/phonelogo.png"
 import emaillogo from "../resources/emaillogo.png"
 import Footer from "./Footer"
 
+let data = [{
+    image: 'https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg'
+},
+{
+    image: 'https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1057506940?k=20&m=1057506940&s=612x612&w=0&h=3j5EA6YFVg3q-laNqTGtLxfCKVR3_o6gcVZZseNaWGk='
+},
+{
+    image:'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__480.jpg'
+}]
+
 function Overview(){
+
+    let [current, setCurrent] = useState(0)
+    const length = data.length
 
     let questionHandler = (e)=>{
         e.target.parentElement.children[1].classList.toggle(styles.hide)
      }
+
+
+    let nextSlide = () => {
+        setCurrent(current === length - 1 ? 0 : current + 1)
+    }
+    let prevSlide = () => {
+        setCurrent(current === 0 ? length - 1 : current - 1)
+    }
+
+    console.log(current);
 
     return <React.Fragment>
         <div className={styles.header}>
@@ -75,14 +98,15 @@ function Overview(){
         </div>
         <div className={styles.highlights}>
             <h1>HIGHLIGHTS</h1>
-            <div style={{maxWidth:'60%',margin:'0 auto'}}>
+            <div className={styles.highlightsInner}>
                 <div className={styles.highlight}><img src={starlogo}/>Highlight one</div>
                 <div className={styles.highlight}><img src={starlogo}/>Highlight two</div>
                 <div className={styles.highlight}><img src={starlogo}/>Highlight three</div>
             </div>
         </div>
         <div className={styles.faq}>
-            <h1>FREQUENTLY ASKED QUESTIONS</h1>
+            <h1 className={styles.largeSc}>FREQUENTLY ASKED QUESTIONS</h1>
+            <h1 className={styles.smallSc}>FAQs</h1>
             <div className={styles.questions}>
             <div>
                 <h3 style={{display:'flex',justifyContent:'space-between',alignItems:'center'}} onClick={questionHandler}>Question One <span>+</span></h3>
@@ -105,6 +129,13 @@ function Overview(){
             </div>
             </div>
         </div>
+        {/* <div className={styles.slider}>
+            <button onClick={prevSlide} className={styles.prevBtn}>Prev</button>
+            <button onClick={nextSlide}  className={styles.nextBtn}>Next</button>
+           <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+            <img className={styles.sliderimage} src={data[current].image} />
+           </div>
+        </div> */}
         <Footer />
       </React.Fragment>
 }

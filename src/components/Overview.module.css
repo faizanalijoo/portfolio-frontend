@@ -12,7 +12,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.849);
+    background-color: rgba(255, 255, 255, 0.918);
     width: 100%;
     padding: 10px 80px;
 }
@@ -156,8 +156,15 @@
     background-color: #F6BA33;
     margin-right: 15px;
 }
+.highlightsInner {
+    max-width: 60%;
+    margin: 0 auto;
+}
 .faq {
     padding: 30px 0px;
+}
+.smallSc {
+    display: none;
 }
 .questions {
     max-width: 60%;
@@ -188,14 +195,23 @@
        height: 30vh;
        width: 100vw;
    } 
+   header {
+       height: fit-content
+   }
+   .headerImage {
+       height: fit-content
+   }
    .headerContent h1 {
-       font-size: 1.2rem;
+       font-size: 1.7rem;
+       background-color: white;
+       z-index: 9999;
    }
    .headerContent {
        position: static;
        width: 100vw;
        padding: 12px;
-       margin: 0;
+       max-width: 90%;
+       margin: 0 auto;
    }
    .occupations p {
        font-size: 0.7rem;
@@ -205,7 +221,7 @@
        font-size: 0.8rem;
    }
    .websiteName a {
-       font-size: 0.8rem;
+       font-size: 0.9rem;
    }
    .address p {
        font-size: 0.8rem;
@@ -217,11 +233,72 @@
        width: 20px;
    }
    .headerCards {
-       flex-direction: column;
-       justify-content: flex-start;
+       max-width: 90%;
        /* align-item; */
    }
-   .catalogue {
-       margin-top: 100px;
+   .headerCards img {
+    height: 30px;
+    /* height: auto; */
+    margin-right: 10px;
+}
+.headerCards h2 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.headerCards p {
+    font-size: 1rem;
+}
+   .catalogueImages {
+       display: block;
+       /* width: 100vw; */
    }
+   .catalogueImages div:nth-child(even),.catalogueImages div:nth-child(odd) {
+       width: 90%;
+       margin: 8px auto;
+       
+   }
+   .largeSc {
+       display: none;
+   }
+   .smallSc {
+       display: block;
+   }
+   .highlightsInner {
+       max-width: 92%;
+   }
+   .questions {
+       max-width: 92%;
+   }
+}
+
+.sliderimage {
+    display: block;
+    width: 600px;
+    height: 400px;
+    object-fit: cover;
+}
+.slider {
+    margin: 40px 0px;
+    position: relative;
+}
+.prevBtn, .nextBtn {
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+}
+.prevBtn {
+    padding: 20px;
+    font-size: 2rem;
+    position: absolute;
+    left: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.nextBtn {
+    padding: 20px;
+    font-size: 2rem;
+    position: absolute;
+    right: 100px;
+    top: 50%;
+    transform: translateY(-50%);
 }
