@@ -189,7 +189,7 @@ function Form(props) {
             <label>State</label>
             <select onChange={(e)=>setSelectedState(e.target.value)}>
             <option value="">Select State</option>
-              {states.map(state => {
+              {states.sort().map(state => {
                   return <option key={state}>{state}</option>
               })}
             </select>
