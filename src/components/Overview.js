@@ -30,9 +30,11 @@ function Overview(props){
 
 
     let _getUserDetails = async () => {
-        let res = await axios.get('http://localhost:3001/getuser/' + props.match.params.id);
+        let res = await axios.get('https://temlin-portfolio.herokuapp.com/getuser/' + props.match.params.id);
+        // console.log(res);
         if(res.status == 200){
             setDetails(res?.data)
+            
         }
     }
 
@@ -40,7 +42,6 @@ function Overview(props){
         _getUserDetails();
     },[])
 
-    console.log(details);
 
     return <React.Fragment>
         <div className={styles.header}>

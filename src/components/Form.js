@@ -134,7 +134,7 @@ function Form(props) {
             usingTemlim: temlinUsing,
             workExperience: MediaArr
         }
-        let res = await axios.post('http://localhost:3001/adduser',data);
+        let res = await axios.post('https://temlin-portfolio.herokuapp.com/adduser',data);
         if(res.status == 200){
             
             setSuccessMessage(true)
