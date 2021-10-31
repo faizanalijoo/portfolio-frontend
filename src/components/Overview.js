@@ -52,17 +52,6 @@ function Overview(props){
                 {details?.services.map(service => {
                     return <p>{service}</p>
                 })}
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-                <p>hello</p>
-
-                <p>hello</p>
-                <p>hello</p>
-                
-                <p>hello</p>
-                
             </div>
             <div className={styles.websiteName}>
                 <img src={websitelogo} alt='website logo'/>

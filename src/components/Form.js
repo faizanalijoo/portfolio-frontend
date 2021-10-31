@@ -139,7 +139,7 @@ function Form(props) {
         if(res.status == 200){
             
             setSuccessMessage(true)
-            history.push(`/overview/${res?.data._id}`)
+            history.push(`/${res?.data._id}/${res?.data.name}`)
         }
         }
 

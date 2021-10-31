@@ -8,7 +8,7 @@ function App() {
     
     <Switch>
       <Route path='/form' render={(props)=><Form {...props}/>}/>
-      <Route path='/overview/:id' render={(props)=><Overview {...props}/>}/>
+      <Route path='/:id/:companyname' render={(props)=><Overview {...props}/>}/>
       <Redirect from='/' to='/form' />
     </Switch>
 
