@@ -1,5 +1,6 @@
 import styles from "./Form.module.css"
 import React, {useEffect, useState} from 'react';
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import moment from "moment";
 import Header from "./Header";
@@ -26,7 +27,7 @@ function Form(props) {
     const [successMessage, setSuccessMessage] = useState(false)
     const [experience, setExperience] = useState([])
     const [image, setImage ] = useState();
-    
+    const history = useHistory();
     const [ MediaArr, setMediaArr ] = useState([]);
     
 
@@ -138,7 +139,7 @@ function Form(props) {
         if(res.status == 200){
             
             setSuccessMessage(true)
-            window.location.pathname = `/overview/${res?.data._id}`
+            history.push(`/overview/${res?.data._id}`)
         }
         }
 
