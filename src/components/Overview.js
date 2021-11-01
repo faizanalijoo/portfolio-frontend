@@ -8,12 +8,15 @@ import locationlogo from "../resources/locationlogo.png"
 import starlogo from "../resources/star.png"
 import phonelogo from "../resources/phonelogo.png"
 import emaillogo from "../resources/emaillogo.png"
+import loader from "../resources/loader.gif"
+import people from "../resources/people.png"
 import Footer from "./Footer"
 import axios from 'axios';
 
 function Overview(props){
 
     const [details, setDetails] = useState();
+    let [loading ,setLoading] = useState(false)
 
     // let [current, setCurrent] = useState(0)
     // const length = data.length
@@ -30,11 +33,11 @@ function Overview(props){
 
 
     let _getUserDetails = async () => {
+        setLoading(true)
         let res = await axios.get('https://temlin-portfolio.herokuapp.com/getuser/' + props.match.params.id);
-        // console.log(res);
         if(res.status == 200){
             setDetails(res?.data)
-            
+            setLoading(false)
         }
     }
 
@@ -44,6 +47,9 @@ function Overview(props){
 
 
     return <React.Fragment>
+        {loading ? <div className={styles.loader}>
+        <img src={loader} />
+        </div> : <>
         <div className={styles.header}>
         <img className={styles.headerImage} src='https://www.constructionexec.com/assets/site_18/images/article/081219110833.jpg?width=1280' />
         <div className={styles.headerContent}>
@@ -82,7 +88,7 @@ function Overview(props){
                 <div><h2>{details?.inBusinessSince ? `${new Date().getFullYear() - parseInt(details?.inBusinessSince)}+` : 'Not Specified'}</h2><p>Experience</p></div>
                 </div>
                 <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between'}}>
-                <img src={rupee} />
+                <img src={people} />
                 <div><h2>{details?.sizeOfFirm}</h2><p>People</p></div>
                 </div>
             </div>
@@ -139,6 +145,8 @@ function Overview(props){
            </div>
         </div> */}
         <Footer />
+        </>}
+        
       </React.Fragment>
 }
 

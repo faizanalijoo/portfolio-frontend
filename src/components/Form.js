@@ -26,7 +26,7 @@ function Form(props) {
     const [isMessage, setIsMessage] = useState(false)
     const [successMessage, setSuccessMessage] = useState(false)
     const [experience, setExperience] = useState([])
-    const [image, setImage ] = useState();
+    const [images, setImages] = useState([]);
     const history = useHistory();
     const [ MediaArr, setMediaArr ] = useState([]);
     
@@ -94,10 +94,6 @@ function Form(props) {
         setNumberProjects(e.target.value);
     }
 
-    useEffect(()=>{
-        upload()
-    },[image])
-
     let firmSizeHandler = (e) => {
         setFirmSize(e.target.value);
     }
@@ -108,18 +104,6 @@ function Form(props) {
 
     let submitHandler = async (e)=> {
         e.preventDefault()
-            // console.log(name);
-            // console.log(phone);
-            // console.log(selectedState);
-            // console.log(numberProjects);
-            // console.log(firmSize)
-            // console.log(email);
-            // console.log(selectedYear);
-            // console.log(services);
-            // console.log(achievements)
-            // console.log(websiteUrl)
-            // console.log(description)
-            // console.log(temlinUsing);
         let data = {
             name: name,
             state: selectedState,
@@ -137,39 +121,44 @@ function Form(props) {
         }
         let res = await axios.post('https://temlin-portfolio.herokuapp.com/adduser',data);
         if(res.status == 200){
-            
             setSuccessMessage(true)
             history.push(`/${res?.data._id}/${res?.data.name}`)
         }
         }
 
-        const upload = () => {
-            const data = new FormData()
-            data.append("file", image)
-            data.append("upload_preset", process.env.REACT_APP_upload_preset)
-            data.append("api_key", process.env.REACT_APP_API_KEY);
-            data.append("cloud_name",process.env.REACT_APP_cloud_name);
-            data.append("cloud_name",process.env.REACT_APP_cloud_name);
 
-            fetch("https://api.cloudinary.com/v1_1/dlzo8dt7m/image/upload",{method:"post",
-            body: data
+        const upload = () => {
+            Array.from(images).map(image => {
+                const data = new FormData()
+                data.append("file", image)
+                data.append("upload_preset", process.env.REACT_APP_upload_preset)
+                data.append("api_key", process.env.REACT_APP_API_KEY);
+                data.append("cloud_name",process.env.REACT_APP_cloud_name);
+                data.append("cloud_name",process.env.REACT_APP_cloud_name);
+    
+                fetch("https://api.cloudinary.com/v1_1/dlzo8dt7m/image/upload",{method:"post",
+                body: data
+                })
+                .then(resp => resp.json())
+                .then(data => {
+                  const media = {
+                      mediaID: data.asset_id,
+                      MediaUrl: data.secure_url,
+                      mediaType: data?.format,
+                      MediaSize: data.bytes,
+                      Date : moment().format('DD-MM-YYYY')
+                  }
+                  if(media.MediaUrl == undefined ) return
+                setMediaArr((n) => [...n,media])
+                })
+                .catch(err => console.log(err))
             })
-            .then(resp => resp.json())
-            .then(data => {
-            console.log("🚀 ~ file: FolderDetails.js ~ line 34 ~ upload ~ data", data)
                 
-              const media = {
-                  mediaID: data.asset_id,
-                  MediaUrl: data.secure_url,
-                  mediaType: data?.format,
-                  MediaSize: data.bytes,
-                  Date : moment().format('DD-MM-YYYY')
-              }
-              if(media.MediaUrl == undefined ) return
-            setMediaArr((n) => [...n,media])
-            })
-            .catch(err => console.log(err))
             }
+
+        useEffect(()=>{
+            upload()
+         },[images])
 
     return <React.Fragment>
         <Header/>
@@ -264,8 +253,8 @@ function Form(props) {
         <div className={styles.formGroup}>
             <label for='files'>Work Experience</label>
             <div style={{position:'relative'}}>
-            <input style={{opacity:'0',zIndex:'999'}} id='files' onChange={(e)=> {
-                setImage(e.target.files[0])
+            <input multiple style={{opacity:'0',zIndex:'999'}} id='files' onChange={(e)=> {
+                setImages(e.target.files)
             }} type='file' />
             <div className={styles.uploadIcon}><i className="fas fa-file-upload fa-10x"></i>
             <p>Drap and drop here to upload files!</p></div>

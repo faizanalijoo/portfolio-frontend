@@ -201,6 +201,7 @@ input[type='file'] {
     text-align: center;
 }
 .uploadIcon p {
+    margin-top: 10px;
     font-size: 1.5rem;
     color: grey;
 }
@@ -230,7 +231,10 @@ select {
     .content {
         display: none;
     }
-    
+    .uploadIcon p {
+        font-size: 1rem;
+        margin-top: 14px;
+    }
     .formGroup {
         display: block;
     }
@@ -251,6 +255,7 @@ select {
         margin: 15px auto;
         font-size: 3rem;
     }
+   
 }
 
 

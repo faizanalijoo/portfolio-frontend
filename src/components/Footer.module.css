@@ -19,9 +19,23 @@ footer p {
 .link .linkk:hover {
     text-decoration: underline;
 }
+footer a {
+    color: rgb(11, 74, 133);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
 
 @media (max-width: 768px){
     footer p {
         padding: 30px;
+    }
+    .link .linkk {
+        font-size: 1.1rem;
+
+    }
+    .link {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

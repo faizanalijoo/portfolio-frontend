@@ -197,6 +197,50 @@
     display: none;
 }
 
+.sliderimage {
+    display: block;
+    width: 600px;
+    height: 400px;
+    object-fit: cover;
+}
+.slider {
+    margin: 40px 0px;
+    position: relative;
+}
+.prevBtn, .nextBtn {
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+}
+.prevBtn {
+    padding: 20px;
+    font-size: 2rem;
+    position: absolute;
+    left: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.nextBtn {
+    padding: 20px;
+    font-size: 2rem;
+    position: absolute;
+    right: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.loader {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader img{
+    height: 60px;
+    width: 60px;
+}
+/* media queries ------- */
+
 @media (max-width: 768px){
    .headerImage {
        max-height:40vh;
@@ -242,6 +286,7 @@
    }
    .headerCards {
        max-width: 90%;
+       margin: 0 auto;
        /* align-item; */
    }
    .headerCards img {
@@ -249,16 +294,15 @@
     /* height: auto; */
     margin-right: 10px;
 }
-.headerCards h2 {
+    .headerCards h2 {
     font-size: 1.3rem;
     font-weight: bold;
 }
-.headerCards p {
+    .headerCards p {
     font-size: 1rem;
 }
    .catalogueImages {
        display: block;
-       /* width: 100vw; */
    }
    .catalogueImages div:nth-child(even),.catalogueImages div:nth-child(odd) {
        width: 90%;
@@ -274,6 +318,10 @@
    .highlightsInner {
        max-width: 92%;
    }
+   .headerCards {
+       max-width: 100vw;
+       margin: 0 auto;
+   }
    .questions {
        max-width: 92%;
    }
@@ -282,34 +330,3 @@
    }
 }
 
-.sliderimage {
-    display: block;
-    width: 600px;
-    height: 400px;
-    object-fit: cover;
-}
-.slider {
-    margin: 40px 0px;
-    position: relative;
-}
-.prevBtn, .nextBtn {
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
-}
-.prevBtn {
-    padding: 20px;
-    font-size: 2rem;
-    position: absolute;
-    left: 100px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.nextBtn {
-    padding: 20px;
-    font-size: 2rem;
-    position: absolute;
-    right: 100px;
-    top: 50%;
-    transform: translateY(-50%);
-}
