@@ -51,7 +51,30 @@
 .address {
     margin: 15px 0px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+}
+.shareBtn {
+    padding: 8px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: #66D1B3;
+    outline: none;
+    margin-right: 50px;
+}
+.shareBtn:hover {
+    background-color: #2aa582;
+}
+.copyText {
+    font-style: italic;
+    margin-left: auto;
+    color: grey;
+    margin-right: 10px;
+    font-size: 0.9rem !important;
 }
 
 .address p {

@@ -17,6 +17,7 @@ function Overview(props){
 
     const [details, setDetails] = useState();
     let [loading ,setLoading] = useState(false)
+    let [urlCopied, setUrlCopied] = useState(false)
 
     // let [current, setCurrent] = useState(0)
     // const length = data.length
@@ -39,6 +40,12 @@ function Overview(props){
             setDetails(res?.data)
             setLoading(false)
         }
+    }
+
+    let shareHandler = (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(window.location.href)
+        setUrlCopied(true)
     }
 
     useEffect(()=>{
@@ -72,8 +79,12 @@ function Overview(props){
             <p>{details?.email}</p>
             </div>
             <div className={styles.address}>
-            <img src={locationlogo}/>
+           <div style={{display:'flex',alignItems:'center'}}>
+           <img src={locationlogo}/>
             <p>{details?.state}</p>
+           </div>
+            {urlCopied && <p className={styles.copyText}>URL has been copied to the clipboard!</p>}
+            <button onClick={shareHandler} className={styles.shareBtn}>Share</button>
             </div>
             
             <div className={styles.line}></div>

@@ -153,7 +153,10 @@ input[type='radio'] {
     text-align: center;
     color: red;
 }
-
+.formText {
+    font-style: italic;
+    color: rgb(79, 79, 79);
+}
 .successMessage {
     background-color: rgba(126, 194, 126, 0.39);
     display: block;

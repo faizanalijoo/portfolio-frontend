@@ -271,15 +271,15 @@ function Form(props) {
           
            <div>
            <input className={styles.services} style={{width:'70%'}} value={service} onChange={(e)=>setService(e.target.value)} type='text'/>
-            
-          
-            <button onClick={(e)=>{
+            <p className={styles.formText}>To add, click on the button below or press enter.</p>
+           <button onClick={(e)=>{
                 e.preventDefault()
                 if(service !== ''){
                     setServices((n)=>[...n,service])
                 }
                setService('')
             }} className={styles.addService}>Add Service</button>
+            
              <div className={styles.serviceList}>
             {services.map((i,index) => {
                 return <h2 key={index}>{index+1}. {i}</h2>
@@ -303,6 +303,7 @@ function Form(props) {
             <label>Key Achievements</label>
            <div>
            <input onChange={(e)=>setAchievement(e.target.value)} id="keyach" value={achievement} type='text'/>
+           <p className={styles.formText}>To add, click on the button below or press enter.</p>
             <button onClick={(e)=>{
                 e.preventDefault()
                 if(achievement !== ''){
