@@ -351,5 +351,20 @@
    .catalogue {
        margin-top: 100px;
    }
+   .address {
+       flex-direction: column;
+       align-items: flex-start;
+       justify-content: flex-start;
+   }
+   .shareBtn {
+       margin-top: 15px;
+       margin-right: 0;
+   }
+   .copyText {
+       margin: 0;
+       padding: 0;
+       margin-top: 20px;
+   }
+   
 }
 
