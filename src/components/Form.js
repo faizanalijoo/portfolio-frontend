@@ -258,7 +258,7 @@ function Form(props) {
         </div> */}
 
         <div className={styles.formGroup}>
-            <label>Total value of all projects<span className={styles.requiredStar}>*</span></label>
+            <label>Total value of all projects (approx)<span className={styles.requiredStar}>*</span></label>
             <input onChange={(e)=>setTotalProjects(e.target.value)} type ='number'/>
         </div>
 
@@ -369,7 +369,7 @@ function Form(props) {
            } */}
 
         <div className={styles.formGroup}>
-            <label for='files'>Work Experience</label>
+            <label for='files'>Add photos of your work</label>
             <div style={{position:'relative'}}>
             <input multiple style={{opacity:'0',zIndex:'999'}} id='files' onChange={(e)=> {
                 setImages(e.target.files)

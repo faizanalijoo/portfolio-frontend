@@ -48,6 +48,9 @@ function Overview(props){
         e.preventDefault();
         navigator.clipboard.writeText(window.location.href)
         setUrlCopied(true)
+        setTimeout(() => {
+            setUrlCopied(false)
+        }, 3000);
     }
 
     useEffect(()=>{
@@ -87,7 +90,10 @@ function Overview(props){
             <p>{details?.state}</p>
            </div>
             {urlCopied && <p className={styles.copyText}>URL has been copied to the clipboard!</p>}
+            <div className={styles.buttons}>
             <button onClick={shareHandler} className={styles.shareBtn}>Share</button>
+            <button onClick={()=>window.print()} className={styles.shareBtn}>Download as PDF</button>
+            </div>
             </div>
             
             <div className={styles.line}></div>
@@ -103,7 +109,7 @@ function Overview(props){
                 </div>
                 <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between'}}>
                 <img src={rupee} />
-                <div><h2>{details?.totalProjects}</h2><p>Total Value</p></div>
+                <div><h2>{details?.totalProjects}</h2><p>Projects' total value</p></div>
                 </div>
             </div>
         </div>
