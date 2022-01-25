@@ -1,0 +1,56 @@
+.phone{
+display: block;
+}
+.password{
+display: block;
+}
+.login h1 {
+    font-weight: 500;
+    font-size: 2.8rem;
+}
+.button {
+display: block;
+padding: 18px 50px;
+border: none;
+outline: none;
+font-size: 1.2rem;
+cursor: pointer;
+margin: 0 auto;
+color: white;
+margin-top: 30px;
+}
+
+.login {
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #181818;
+}
+.phone, .password, .button {
+    background-color: #181818;
+    border: 1px solid #6591AC;
+    border-radius: 50px;
+    margin-bottom: 15px;
+    padding: 10px 30px;
+    color: white;
+}
+.login p{
+    margin-bottom: 30px;
+    color:grey
+}
+.button {
+    border: 3px solid #16351D;
+    padding: 15px 50px;
+}
+::placeholder {
+    color: rgba(123, 123, 123, 0.103);
+    /* font-size: 1.5rem; */
+}
+.errorMessage {
+    color: red !important;
+    margin: 20px;
+}

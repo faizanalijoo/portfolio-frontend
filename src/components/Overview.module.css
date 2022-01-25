@@ -23,6 +23,11 @@
    
 
 }
+.category {
+    color: rgb(99, 99, 99);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
 .occupations {
     display: flex;
     flex-wrap: wrap;

@@ -36,6 +36,8 @@ function Overview(props){
     let _getUserDetails = async () => {
         setLoading(true)
         let res = await axios.get('https://temlin-portfolio.herokuapp.com/getuser/' + props.match.params.id);
+        // let res = await axios.get('http://localhost:3001/getuser/' + props.match.params.id);
+
         if(res.status == 200){
             setDetails(res?.data)
             setLoading(false)
@@ -61,6 +63,7 @@ function Overview(props){
         <img className={styles.headerImage} src='https://www.constructionexec.com/assets/site_18/images/article/081219110833.jpg?width=1280' />
         <div className={styles.headerContent}>
             <h1>{details?.name}</h1>
+            <p className={styles.category}>{details?.category}</p>
             <div className={styles.occupations}>
                 {details?.services.map(service => {
                     return <p>{service}</p>
@@ -92,15 +95,15 @@ function Overview(props){
                 <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between'}}>
                     <img src={briefcase} />
                     <div><h2>{details?.numberOfProjects}</h2>
-                    <p>Projects</p></div>
+                    <p>Total Projects</p></div>
                 </div>
                 <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between'}}>
                 <img src={medal} />
-                <div><h2>{details?.inBusinessSince ? `${new Date().getFullYear() - parseInt(details?.inBusinessSince)}+` : 'Not Specified'}</h2><p>Experience</p></div>
+                <div><h2>{details?.inBusinessSince ? `${new Date().getFullYear() - parseInt(details?.inBusinessSince)}+` : 'Not Specified'}</h2><p>Years of Experience</p></div>
                 </div>
                 <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between'}}>
-                <img src={people} />
-                <div><h2>{details?.sizeOfFirm}</h2><p>People</p></div>
+                <img src={rupee} />
+                <div><h2>{details?.totalProjects}</h2><p>Total Value</p></div>
                 </div>
             </div>
         </div>
@@ -123,7 +126,7 @@ function Overview(props){
                 })}
              </div>
         </div>
-        <div className={styles.faq}>
+        {/* <div className={styles.faq}>
             <h1 className={styles.largeSc}>FREQUENTLY ASKED QUESTIONS</h1>
             <h1 className={styles.smallSc}>FAQs</h1>
             <div className={styles.questions}>
@@ -147,7 +150,7 @@ function Overview(props){
                 <p className={styles.hide}>Answer to question four</p>
             </div>
             </div>
-        </div>
+        </div> */}
         {/* <div className={styles.slider}>
             <button onClick={prevSlide} className={styles.prevBtn}>Prev</button>
             <button onClick={nextSlide}  className={styles.nextBtn}>Next</button>

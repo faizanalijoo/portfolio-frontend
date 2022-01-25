@@ -11,7 +11,11 @@ function Form(props) {
     const [firstPage, setFirstPage] = useState(true)
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
-    const [numberProjects, setNumberProjects] = useState()
+    const [password, setPassword] = useState('')
+    const [category, setCategory] = useState('')
+    const [ongoing, setOngoing] = useState('')
+    const [totalProjects, setTotalProjects] = useState('')
+    const [numberProjects, setNumberProjects] = useState('')
     const [firmSize, setFirmSize] = useState()
     const [email, setEmail] = useState('')
     const [service, setService] = useState('')
@@ -24,6 +28,7 @@ function Form(props) {
     const [description, setDescription]= useState('');
     const [temlinUsing, setTemlinUsing] = useState('')
     const [isMessage, setIsMessage] = useState(false)
+    const [isPassword, setIsPassword] = useState(false);
     const [successMessage, setSuccessMessage] = useState(false)
     const [experience, setExperience] = useState([])
     const [images, setImages] = useState([]);
@@ -77,17 +82,13 @@ function Form(props) {
     }
     let nextHandler = (e) => {
         e.preventDefault()
-        if(name === '' || email === '' || phone == ''){
-            console.log('Please mark all required fields!');
-            console.log(MediaArr);
+        if(name === '' || email === '' || phone == '' || selectedState == '' || category == '' || services == [] || numberProjects == '' || totalProjects == ''){
             setIsMessage(true)
         } else {
             
             setFirstPage(false)
             setIsMessage(false)
-
-           
-        }
+         }
     }
 
     let numberProjectsHandler = (e) => {
@@ -103,28 +104,36 @@ function Form(props) {
     }
 
     let submitHandler = async (e)=> {
-        e.preventDefault()
-        let data = {
+        e.preventDefault();
+            
+            let data = {
             name: name,
             state: selectedState,
             phone: phone,
-            inBusinessSince: selectedYear,
-            numberOfProjects: numberProjects,
-            sizeOfFirm: firmSize,
             email: email,
+            category: category,
             services: services,
-            achievements: achievements,
+            numberOfProjects: numberProjects,
+            // ongoingProjects: ongoing,
+            totalProjects: totalProjects,
             website: websiteUrl,
+            inBusinessSince: selectedYear,
             description: description,
-            usingTemlim: temlinUsing,
-            workExperience: MediaArr
-        }
+            achievements: achievements,
+            workExperience: MediaArr,
+            // sizeOfFirm: firmSize,
+            // password: password,
+            // usingTemlim: temlinUsing,
+            }
+
+
         let res = await axios.post('https://temlin-portfolio.herokuapp.com/adduser',data);
+        // let res = await axios.post('http://localhost:3001/adduser',data);
         if(res.status == 200){
             setSuccessMessage(true)
             history.push(`/${res?.data._id}/${res?.data.name}`)
         }
-        }
+       }
 
 
         const upload = () => {
@@ -160,6 +169,8 @@ function Form(props) {
             upload()
          },[images])
 
+         console.log(MediaArr);
+
     return <React.Fragment>
         <Header/>
       <form>
@@ -171,11 +182,11 @@ function Form(props) {
         
         {firstPage && <div>
             <div className={styles.formGroup}>
-            <label>Name <span className={styles.requiredStar}>*</span></label>
+            <label>Name of the company<span className={styles.requiredStar}>*</span></label>
             <input value={name} onChange={(e)=>setName(e.target.value)} id="name" type='text'/>
            </div>
         <div className={styles.formGroup}>
-            <label>State</label>
+            <label>State<span className={styles.requiredStar}>*</span></label>
             <select onChange={(e)=>setSelectedState(e.target.value)}>
             <option value="">Select State</option>
               {states.sort().map(state => {
@@ -184,42 +195,76 @@ function Form(props) {
             </select>
         </div>
         <div className={styles.formGroup}>
-            <label>Phone <span className={styles.requiredStar}>*</span></label>
+            <label>Contact Number<span className={styles.requiredStar}>*</span></label>
             <input value={phone} maxLength='10' onChange={(e)=>setPhone(e.target.value)} type='tel'/>
         </div>
         <div className={styles.formGroup}>
-            <label>In Business Since</label>
-            <select onChange={(e)=>setSelectedYear(e.target.value)}>
-               <option value=''>Select Year</option>
-               {years.map(year => {
-                   return <option key={year}>{year}</option>
-               })}
-            </select>
+        <label>Email<span className={styles.requiredStar}>*</span></label>
+        <input value={email} onChange={(e)=>setEmail(e.target.value)} type='email' />
         </div>
+
         <div className={styles.formGroup}>
-            <label>Number of projects done</label>
+            <label>Category of Business<span className={styles.requiredStar}>*</span></label>
             <div className={styles.radio}>
-
-                <div className={styles.checkbox}>
-                <input onChange={numberProjectsHandler} value='0-10' type='radio' name='numberProjects'/>
-                <label>0-10</label><br/>
-                </div>
-                
-
+               
                <div className={styles.checkbox}>
-               <input onChange={numberProjectsHandler} value='11-20' type='radio' name='numberProjects'/>
-                <label>11-20</label><br/>
+               <input onChange={(e)=>setCategory(e.target.value)} value='Labour Contractor' type='radio' name='category'/>
+                <label>Labour Contractor</label><br/>
                </div>
                 
+                <div className={styles.checkbox}>
+                <input onChange={(e)=>setCategory(e.target.value)} value='Machinery Contractor' type='radio' name='category'/>
+                <label>Machinery Contractor</label><br/>
+                </div>
+
+                
 
                 <div className={styles.checkbox}>
-                <input onChange={numberProjectsHandler} value='Above 20' type='radio' name='numberProjects'/>
-                <label>Above 20</label>
+                <input onChange={(e)=>setCategory(e.target.value)} value='Material Contractor' type='radio' name='category'/>
+                <label>Material Contractor</label><br/>
                 </div>
-               
             </div>
         </div>
+
         <div className={styles.formGroup}>
+            <label>Your Services<span className={styles.requiredStar}>*</span></label>
+          <div>
+           <input className={styles.services} style={{width:'70%'}} value={service} onChange={(e)=>setService(e.target.value)} type='text'/>
+            <p className={styles.formText}>To add, click on the button below or press enter.</p>
+           <button onClick={(e)=>{
+                e.preventDefault()
+                if(service !== ''){
+                    setServices((n)=>[...n,service])
+                }
+               setService('')
+            }} className={styles.addService}>Add Service</button>
+            
+             <div className={styles.serviceList}>
+            {services.map((i,index) => {
+                return <h2 key={index}>{index+1}. {i}</h2>
+            })}
+            </div>
+           </div>
+        </div>
+
+        <div className={styles.formGroup}>
+            <label>Total number of projects<span className={styles.requiredStar}>*</span></label>
+            <input onChange={(e)=>setNumberProjects(e.target.value)} type ='number'/>
+        </div>
+
+        {/* <div className={styles.formGroup}>
+            <label>Number of ongoing projects<span className={styles.requiredStar}>*</span></label>
+            <input onChange={(e)=>setOngoing(e.target.value)} type ='number'/>
+        </div> */}
+
+        <div className={styles.formGroup}>
+            <label>Total value of all projects<span className={styles.requiredStar}>*</span></label>
+            <input onChange={(e)=>setTotalProjects(e.target.value)} type ='number'/>
+        </div>
+
+        
+        
+        {/* <div className={styles.formGroup}>
             <label>Size of the firm</label>
             <div className={styles.radio}>
                
@@ -245,49 +290,8 @@ function Form(props) {
                 <label>Above 100</label><br/>
                 </div>
             </div>
-        </div>
-        <div className={styles.formGroup}>
-        <label>Email <span className={styles.requiredStar}>*</span></label>
-        <input value={email} onChange={(e)=>setEmail(e.target.value)} type='email' />
-        </div>
-        <div className={styles.formGroup}>
-            <label for='files'>Work Experience</label>
-            <div style={{position:'relative'}}>
-            <input multiple style={{opacity:'0',zIndex:'999'}} id='files' onChange={(e)=> {
-                setImages(e.target.files)
-            }} type='file' />
-            <div className={styles.uploadIcon}><i className="fas fa-file-upload fa-10x"></i>
-            <p>Drap and drop here to upload files!</p></div>
-            </div>
-            
-        </div>
-        <div className={styles.expImages}>
-            {MediaArr.map(i => {
-                        return <img src={i.MediaUrl}/>
-            })}
-        </div>
-        <div className={styles.formGroup}>
-            <label>Your Services</label>
-          
-           <div>
-           <input className={styles.services} style={{width:'70%'}} value={service} onChange={(e)=>setService(e.target.value)} type='text'/>
-            <p className={styles.formText}>To add, click on the button below or press enter.</p>
-           <button onClick={(e)=>{
-                e.preventDefault()
-                if(service !== ''){
-                    setServices((n)=>[...n,service])
-                }
-               setService('')
-            }} className={styles.addService}>Add Service</button>
-            
-             <div className={styles.serviceList}>
-            {services.map((i,index) => {
-                return <h2 key={index}>{index+1}. {i}</h2>
-            })}
-        </div>
-           </div>
+        </div> */}
         
-        </div>
            {isMessage && <div className={styles.message}>
            <p>Please fill in all the required fields before proceeding to the next page!</p>
            </div>}
@@ -300,6 +304,26 @@ function Form(props) {
         
         {!firstPage && <div>
             <div className={styles.formGroup}>
+            <label>In Business Since</label>
+            <select onChange={(e)=>setSelectedYear(e.target.value)}>
+               <option value=''>Select Year</option>
+               {years.map(year => {
+                   return <option key={year}>{year}</option>
+               })}
+            </select>
+           </div>
+
+        <div className={styles.formGroup}>
+            <label>Company Website</label>
+            <input onChange={(e)=>setWebsiteUrl(e.target.value)} type='text'/>
+        </div>
+        
+        <div className={styles.formGroup}>
+            <label>About the Company</label>
+            <input onChange={(e)=>setDescription(e.target.value)} type='text'/>
+        </div>
+
+        <div className={styles.formGroup}>
             <label>Key Achievements</label>
            <div>
            <input onChange={(e)=>setAchievement(e.target.value)} id="keyach" value={achievement} type='text'/>
@@ -318,18 +342,8 @@ function Form(props) {
         </div>
            </div>
         </div>
-        
-        
-        <div className={styles.formGroup}>
-            <label>Company Website</label>
-            <input onChange={(e)=>setWebsiteUrl(e.target.value)} type='text'/>
-        </div>
-        
-        <div className={styles.formGroup}>
-            <label>About the Company</label>
-            <input onChange={(e)=>setDescription(e.target.value)} type='text'/>
-        </div>
-        <div className={styles.formGroup}>
+
+        {/* <div className={styles.formGroup}>
             <label>Are you using Temlin for your Project?</label>
             <div className={styles.radio}>
 
@@ -342,7 +356,36 @@ function Form(props) {
                 <label>No</label><br/>
                 </div>
             </div>
+        </div> */}
+
+        {/* <div className={styles.formGroup}>
+            <label htmlFor='password'>Create a Password <span className={styles.requiredStar}>*</span></label>
+            <input value={password} onChange={(e)=>setPassword(e.target.value)} id="password" type='password'/>
+           </div> */}
+           {/* {isPassword && 
+           <div className={styles.message}>
+           <p>Please create a password before submitting</p>
+           </div>
+           } */}
+
+        <div className={styles.formGroup}>
+            <label for='files'>Work Experience</label>
+            <div style={{position:'relative'}}>
+            <input multiple style={{opacity:'0',zIndex:'999'}} id='files' onChange={(e)=> {
+                setImages(e.target.files)
+            }} type='file' />
+            <div className={styles.uploadIcon}><i className="fas fa-file-upload fa-10x"></i>
+            <p>Drag and drop here to upload files!</p></div>
+            </div>
         </div>
+
+        <div className={styles.expImages}>
+            {MediaArr.map(i => {
+               return <img src={i.MediaUrl}/>
+            })}
+            
+        </div>
+           
         {successMessage && <div className={styles.successMessage}>
             <p>Your data has been saved successfully!</p>
         </div>}
