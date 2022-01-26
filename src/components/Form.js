@@ -5,6 +5,9 @@ import axios from 'axios';
 import moment from "moment";
 import Header from "./Header";
 import { Link } from "react-router-dom";
+import excelicon from "../resources/excelicon.svg"
+import pdficon from "../resources/pdficon.svg"
+import wordicon from "../resources/wordicon.svg"
 
 
 function Form(props) {
@@ -19,6 +22,7 @@ function Form(props) {
     const [firmSize, setFirmSize] = useState()
     const [email, setEmail] = useState('')
     const [service, setService] = useState('')
+    const [projectsDone, setProjectsDone] = useState([])
     const [services, setServices] = useState([]);
     const [achievement, setAchievement] = useState('')
     const [achievements, setAchievements] = useState([]);
@@ -82,7 +86,7 @@ function Form(props) {
     }
     let nextHandler = (e) => {
         e.preventDefault()
-        if(name === '' || email === '' || phone == '' || selectedState == '' || category == '' || services == [] || numberProjects == '' || totalProjects == ''){
+        if(name === '' || email === '' || phone == '' || selectedState == '' || category == '' || services.length == 0 || numberProjects == '' || totalProjects == '' || projectsDone.length == 0){
             setIsMessage(true)
         } else {
             
@@ -121,14 +125,15 @@ function Form(props) {
             description: description,
             achievements: achievements,
             workExperience: MediaArr,
+            projectsDone: projectsDone
             // sizeOfFirm: firmSize,
             // password: password,
             // usingTemlim: temlinUsing,
             }
 
 
-        let res = await axios.post('https://temlin-portfolio.herokuapp.com/adduser',data);
-        // let res = await axios.post('http://localhost:3001/adduser',data);
+        // let res = await axios.post('https://temlin-portfolio.herokuapp.com/adduser',data);
+        let res = await axios.post('http://localhost:5000/adduser',data);
         if(res.status == 200){
             setSuccessMessage(true)
             history.push(`/${res?.data._id}/${res?.data.name}`)
@@ -145,7 +150,7 @@ function Form(props) {
                 data.append("cloud_name",process.env.REACT_APP_cloud_name);
                 data.append("cloud_name",process.env.REACT_APP_cloud_name);
     
-                fetch("https://api.cloudinary.com/v1_1/dlzo8dt7m/image/upload",{method:"post",
+                fetch("https://api.cloudinary.com/v1_1/dlzo8dt7m/auto/upload",{method:"post",
                 body: data
                 })
                 .then(resp => resp.json())
@@ -153,12 +158,13 @@ function Form(props) {
                   const media = {
                       mediaID: data.asset_id,
                       MediaUrl: data.secure_url,
-                      mediaType: data?.format,
+                      mediaType: data?.format || image.type,
                       MediaSize: data.bytes,
                       Date : moment().format('DD-MM-YYYY')
                   }
                   if(media.MediaUrl == undefined ) return
                 setMediaArr((n) => [...n,media])
+                // console.log(media);
                 })
                 .catch(err => console.log(err))
             })
@@ -168,8 +174,6 @@ function Form(props) {
         useEffect(()=>{
             upload()
          },[images])
-
-         console.log(MediaArr);
 
     return <React.Fragment>
         <Header/>
@@ -245,6 +249,76 @@ function Form(props) {
             })}
             </div>
            </div>
+        </div>
+
+        <div className={styles.formGroup}>
+            <label>Types of Projects done<span className={styles.requiredStar}>*</span></label>
+            <div className={styles.radio}>
+               
+               <div className={styles.checkbox}>
+               <input onChange={(e)=>{
+                   if(e.target.checked == true){
+                       setProjectsDone([e.target.value,...projectsDone])
+                   } else if(e.target.checked == false) {
+                       setProjectsDone(projectsDone.filter(i => i !== e.target.value))
+                   }
+                   }} value='Expressways' type='checkbox'/>
+                <label>Expressways</label><br/>
+               </div>
+               <div className={styles.checkbox}>
+                <input onChange={(e)=>{
+                   if(e.target.checked == true){
+                       setProjectsDone([e.target.value,...projectsDone])
+                   } else if(e.target.checked == false) {
+                       setProjectsDone(projectsDone.filter(i => i !== e.target.value))
+                   }
+                   }} value='National Highways' type='checkbox'/>
+                <label>National Highways</label><br/>
+                </div>
+                <div className={styles.checkbox}>
+                <input onChange={(e)=>{
+                   if(e.target.checked == true){
+                       setProjectsDone([e.target.value,...projectsDone])
+                   } else if(e.target.checked == false) {
+                       setProjectsDone(projectsDone.filter(i => i !== e.target.value))
+                   }
+                   }} value='State Highways' type='checkbox'/>
+                <label>State Highways</label><br/>
+                </div>
+
+                <div className={styles.checkbox}>
+                <input onChange={(e)=>{
+                   if(e.target.checked == true){
+                       setProjectsDone([e.target.value,...projectsDone])
+                   } else if(e.target.checked == false) {
+                       setProjectsDone(projectsDone.filter(i => i !== e.target.value))
+                   }
+                   }} value='District Roads' type='checkbox'/>
+                <label>District Roads</label><br/>
+                </div>
+
+                <div className={styles.checkbox}>
+                <input onChange={(e)=>{
+                   if(e.target.checked == true){
+                       setProjectsDone([e.target.value,...projectsDone])
+                   } else if(e.target.checked == false) {
+                       setProjectsDone(projectsDone.filter(i => i !== e.target.value))
+                   }
+                   }} value='Rural Roads' type='checkbox'/>
+                <label>Rural Roads</label><br/>
+                </div>
+
+                <div className={styles.checkbox}>
+                <input onChange={(e)=>{
+                   if(e.target.checked == true){
+                       setProjectsDone([e.target.value,...projectsDone])
+                   } else if(e.target.checked == false) {
+                       setProjectsDone(projectsDone.filter(i => i !== e.target.value))
+                   }
+                   }} value='Others' type='checkbox'/>
+                <label>Others</label><br/>
+                </div>
+            </div>
         </div>
 
         <div className={styles.formGroup}>
@@ -369,7 +443,7 @@ function Form(props) {
            } */}
 
         <div className={styles.formGroup}>
-            <label for='files'>Add photos of your work</label>
+            <label for='files'>Add media of your work</label>
             <div style={{position:'relative'}}>
             <input multiple style={{opacity:'0',zIndex:'999'}} id='files' onChange={(e)=> {
                 setImages(e.target.files)
@@ -381,7 +455,19 @@ function Form(props) {
 
         <div className={styles.expImages}>
             {MediaArr.map(i => {
-               return <img src={i.MediaUrl}/>
+                if(i.mediaType == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
+                    return <img style={{objectFit:'contain'}} src={excelicon}/>
+                } else if (i.mediaType == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'){
+                    return <img src={wordicon} />
+                } 
+                
+                else if (i.mediaType == 'pdf') {
+
+                    return <img style={{objectFit:'contain'}} src={pdficon}/>
+                } else {
+                    return <img src={i.MediaUrl}/>
+                }
+
             })}
             
         </div>

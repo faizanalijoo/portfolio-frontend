@@ -12,6 +12,9 @@ import loader from "../resources/loader.gif"
 import people from "../resources/people.png"
 import Footer from "./Footer"
 import axios from 'axios';
+import excelicon from "../resources/excelicon.svg"
+import pdficon from "../resources/pdficon.svg"
+import wordicon from "../resources/wordicon.svg"
 
 function Overview(props){
 
@@ -35,8 +38,8 @@ function Overview(props){
 
     let _getUserDetails = async () => {
         setLoading(true)
-        let res = await axios.get('https://temlin-portfolio.herokuapp.com/getuser/' + props.match.params.id);
-        // let res = await axios.get('http://localhost:3001/getuser/' + props.match.params.id);
+        // let res = await axios.get('https://temlin-portfolio.herokuapp.com/getuser/' + props.match.params.id);
+        let res = await axios.get('http://localhost:5000/getuser/' + props.match.params.id);
 
         if(res.status == 200){
             setDetails(res?.data)
@@ -68,9 +71,12 @@ function Overview(props){
             <h1>{details?.name}</h1>
             <p className={styles.category}>{details?.category}</p>
             <div className={styles.occupations}>
-                {details?.services.map(service => {
+                {details?.projectsDone.map(service => {
                     return <p>{service}</p>
                 })}
+            </div>
+            <div className={styles.serv}>
+                <p>Services - {details?.services.map(service => <span>{service}, </span>)}</p>
             </div>
             <div className={styles.websiteName}>
                 <img src={websitelogo} alt='website logo'/>
@@ -97,33 +103,54 @@ function Overview(props){
             </div>
             
             <div className={styles.line}></div>
+
             <div className={styles.headerCards}>
-                <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between'}}>
-                    <img src={briefcase} />
+                <div className={styles.headerCard}>
+                    <div className={styles.headericon}><img src={briefcase} /></div>
                     <div><h2>{details?.numberOfProjects}</h2>
                     <p>Total Projects</p></div>
                 </div>
-                <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between'}}>
-                <img src={medal} />
+                <div className={styles.headerCard}>
+                <div className={styles.headericon}><img src={medal} /></div>
                 <div><h2>{details?.inBusinessSince ? `${new Date().getFullYear() - parseInt(details?.inBusinessSince)}+` : 'Not Specified'}</h2><p>Years of Experience</p></div>
                 </div>
-                <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between'}}>
-                <img src={rupee} />
+                <div className={styles.headerCard}>
+               <div className={styles.headericon}> <img src={rupee} /></div>
                 <div><h2>{details?.totalProjects}</h2><p>Projects' total value</p></div>
                 </div>
             </div>
+            
         </div>
         </div>
         <div className={styles.catalogue}>
             <h1>CATALOGUE</h1>
             <div className={styles.catalogueImages}>
                 {details?.workExperience.map(exp => {
+                    if(exp.mediaType == 'png' || exp.mediaType == 'jpg' || exp.mediaType == 'jpeg'){
                     return <div className={`${styles.image} ${styles.lastImage}`}><img src={exp.MediaUrl} />
                     {/* <p className={styles.moreImages}>+3</p> */}
                     </div>
+                    }
                 })}
             </div>
         </div>
+
+        <div className={styles.documents}>
+            <h1>DOCUMENTS</h1>
+            <div className={styles.projectDocuments}>
+                {details?.workExperience.map(exp => {
+                    if(exp.mediaType == 'pdf'){
+                        return <a href={exp.MediaUrl} download><img src={pdficon} /></a>
+                    } else if(exp.mediaType == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
+                        return <a href={exp.MediaUrl} download><img src={excelicon} /></a>
+                    } else if(exp.mediaType == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'){
+                        return <a href={exp.MediaUrl} download><img src={wordicon} /></a>
+                    }
+                })}
+            </div>
+        </div>
+
+
         <div className={styles.highlights}>
             <h1>HIGHLIGHTS</h1>
             <div className={styles.highlightsInner}>

@@ -112,7 +112,7 @@ select {
     padding: 8px;
     color: rgb(53, 53, 53);
 }
-input[type='radio'] {
+input[type='radio'], input[type='checkbox'] {
     height: 40px;
     width: 40px;
     cursor: pointer;
