@@ -132,8 +132,8 @@ function Form(props) {
             }
 
 
-        // let res = await axios.post('https://temlin-portfolio.herokuapp.com/adduser',data);
-        let res = await axios.post('http://localhost:5000/adduser',data);
+        let res = await axios.post('https://temlin-portfolio.herokuapp.com/adduser',data);
+        // let res = await axios.post('http://localhost:5000/adduser',data);
         if(res.status == 200){
             setSuccessMessage(true)
             history.push(`/${res?.data._id}/${res?.data.name}`)

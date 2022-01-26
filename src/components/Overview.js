@@ -38,8 +38,8 @@ function Overview(props){
 
     let _getUserDetails = async () => {
         setLoading(true)
-        // let res = await axios.get('https://temlin-portfolio.herokuapp.com/getuser/' + props.match.params.id);
-        let res = await axios.get('http://localhost:5000/getuser/' + props.match.params.id);
+        let res = await axios.get('https://temlin-portfolio.herokuapp.com/getuser/' + props.match.params.id);
+        // let res = await axios.get('http://localhost:5000/getuser/' + props.match.params.id);
 
         if(res.status == 200){
             setDetails(res?.data)
