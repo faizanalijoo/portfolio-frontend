@@ -86,7 +86,7 @@ function Form(props) {
     }
     let nextHandler = (e) => {
         e.preventDefault()
-        if(name === '' || email === '' || phone == '' || selectedState == '' || category == '' || services.length == 0 || numberProjects == '' || totalProjects == '' || projectsDone.length == 0){
+        if(name === '' || email === '' || phone == '' || selectedState == '' || category == '' || numberProjects == '' || totalProjects == '' || projectsDone.length == 0){
             setIsMessage(true)
         } else {
             
@@ -231,7 +231,7 @@ function Form(props) {
         </div>
 
         <div className={styles.formGroup}>
-            <label>Your Services<span className={styles.requiredStar}>*</span></label>
+            <label>Your Services</label>
           <div>
            <input className={styles.services} style={{width:'70%'}} value={service} onChange={(e)=>setService(e.target.value)} type='text'/>
             <p className={styles.formText}>To add, click on the button below or press enter.</p>
@@ -398,7 +398,7 @@ function Form(props) {
         </div>
 
         <div className={styles.formGroup}>
-            <label>Key Achievements</label>
+            <label>Achievements (Previous Clients)</label>
            <div>
            <input onChange={(e)=>setAchievement(e.target.value)} id="keyach" value={achievement} type='text'/>
            <p className={styles.formText}>To add, click on the button below or press enter.</p>
